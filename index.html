@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Học Tập Thành Công</title>
+
+  <!-- Bootstrap & Swiper CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="bg-light text-center p-4">
+
+  <!-- Toggle Dark Mode -->
+  <button id="menuBtn" class="btn btn-outline-dark position-absolute top-0 end-0 m-3">&#x2630;</button>
+
+  <h1 class="mb-4">Get Random Anime</h1>
+
+  <!-- Dropdown + buttons -->
+  <div class="d-flex flex-wrap justify-content-center gap-3 mb-4">
+    <select id="tagSelector" class="form-select w-auto">
+      <option value="waifu">🎴 Waifu</option>
+      <option value="ass">🍑 Ass</option>
+      <option value="hentai">🖤 Hentai</option>
+      <option value="milf">👩‍🦳 MILF</option>
+      <option value="oral">👄 Oral</option>
+      <option value="paizuri">🫦 Paizuri</option>
+      <option value="ecchi">💋 Ecchi</option>
+      <option value="ero">🔞 Ero</option>
+      <option value="vagina" data-custom="true">❤️ Vagina (Custom)</option>
+    </select>
+
+    <button id="loadImageBtn" class="btn btn-primary">🎯 Load Image</button>
+    <button id="clearBtn" class="btn btn-outline-secondary">🧹 Clear</button>
+  </div>
+
+  <!-- Image Container -->
+  <div id="animeContainer" class="d-flex flex-wrap justify-content-center gap-3"></div>
+
+  <!-- IG-Style Modal with Swiper -->
+  <div class="modal fade" id="animeModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen">
+      <div class="modal-content bg-black border-0">
+        <div class="modal-body p-0 position-relative">
+
+          <!-- Close button -->
+          <div id="pixelCloseBtn" class="pixel-close-btn z-3"></div>
+
+          <!-- Swiper -->
+          <div class="swiper mySwiper h-100">
+            <div class="swiper-wrapper" id="swiperWrapper">
+              <!-- Dynamically filled -->
+            </div>
+
+            <!-- Swiper controls -->
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-pagination"></div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
