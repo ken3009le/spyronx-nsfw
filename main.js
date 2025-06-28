@@ -1,10 +1,12 @@
 let imageList = [];
 let swiper;
 
+// Tạo IP ngẫu nhiên
 function generateRandomIP() {
   return Array(4).fill(0).map(() => Math.floor(Math.random() * 256)).join('.');
 }
 
+// Gọi API lấy ảnh
 function fetchAnime(apiUrl, isCustom = false) {
   const headers = isCustom ? new Headers({ 'X-Forwarded-For': generateRandomIP() }) : undefined;
 
@@ -14,10 +16,8 @@ function fetchAnime(apiUrl, isCustom = false) {
       const imgUrl = data?.url || data?.images?.[0]?.url;
       if (!imgUrl) return;
 
-      // Save to image list
+      // Lưu và hiển thị ảnh
       imageList.unshift(imgUrl);
-
-      // Display thumbnail
       const animeContainer = document.getElementById('animeContainer');
       const img = document.createElement('img');
       img.src = imgUrl;
@@ -28,9 +28,10 @@ function fetchAnime(apiUrl, isCustom = false) {
     .catch(err => console.error("Lỗi:", err));
 }
 
+// Mở Viewer
 function openViewer(clickedUrl) {
   const swiperWrapper = document.getElementById('swiperWrapper');
-  swiperWrapper.innerHTML = ''; // Clear slides
+  swiperWrapper.innerHTML = ''; // Xóa slide cũ
 
   imageList.forEach(url => {
     const slide = document.createElement('div');
@@ -39,49 +40,57 @@ function openViewer(clickedUrl) {
     swiperWrapper.appendChild(slide);
   });
 
-  // Show modal
+  // Hiện modal
   const modal = new bootstrap.Modal(document.getElementById('animeModal'));
   modal.show();
 
-  // Init or update swiper
+  // Init swiper
   if (swiper) {
     swiper.update();
     swiper.slideTo(imageList.indexOf(clickedUrl));
   } else {
     swiper = new Swiper(".mySwiper", {
       loop: false,
-      navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
-      pagination: { el: ".swiper-pagination", type: "fraction" },
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev"
+      },
+      pagination: {
+        el: ".swiper-pagination",
+        type: "fraction"
+      },
     });
     swiper.slideTo(imageList.indexOf(clickedUrl));
   }
 }
 
-// Load image from dropdown
+// Bắt sự kiện Load ảnh
 document.getElementById('loadImageBtn').addEventListener('click', () => {
   const selector = document.getElementById('tagSelector');
   const selected = selector.selectedOptions[0];
   const tag = selected.value;
-  const isCustom = selected.dataset.custom === "true";
 
-  if (isCustom && tag === "vagina") {
-    fetchAnime('https://apiquockhanh.click/images/lon', true);
+  if (tag === "vagina") {
+    // Gọi API custom khi tag là vagina
+    fetchAnime('https://nsfw-api-p302.onrender.com/h/image/search?q=pussy', true);
   } else {
+    // Gọi API mặc định với tag thông thường
     fetchAnime(`https://api.waifu.im/search?included_tags=${tag}`);
   }
 });
 
-// Clear all
+// Xóa toàn bộ ảnh
 document.getElementById('clearBtn').addEventListener('click', () => {
   document.getElementById('animeContainer').innerHTML = '';
   imageList = [];
 });
 
-// Toggle dark mode
+// Dark Mode Toggle
 document.getElementById('menuBtn').addEventListener('click', () => {
   document.body.classList.toggle('dark-mode');
 });
-// Nút đóng pixel-style
+
+// Đóng modal pixel
 document.getElementById('pixelCloseBtn').addEventListener('click', () => {
   const modalEl = document.getElementById('animeModal');
   const modal = bootstrap.Modal.getInstance(modalEl);
