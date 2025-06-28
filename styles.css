@@ -1,8 +1,23 @@
+html {
+  font-size: 16px;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
 body.dark-mode {
   background-color: #111;
   color: #f2f2f2;
 }
 
+button, select, .btn, .form-select {
+  font-size: 16px !important;
+  min-height: 48px;
+  min-width: 48px;
+  padding: 12px 20px;
+  cursor: pointer;
+}
+
+/* Ảnh thumbnail */
 .animeImage {
   max-height: 300px;
   border-radius: 10px;
@@ -14,7 +29,7 @@ body.dark-mode {
   transform: scale(1.03);
 }
 
-/* Swiper fullscreen */
+/* Swiper modal viewer */
 .swiper {
   width: 100%;
   height: 100%;
@@ -31,17 +46,18 @@ body.dark-mode {
   max-width: 100%;
   object-fit: contain;
 }
+
 /* Pixel-style Close Button */
 .pixel-close-btn {
   position: absolute;
-  top: 20px;
-  right: 20px;
+  top: 15px;
+  right: 15px;
   width: 40px;
   height: 40px;
   background-color: #f99db4;
   border-radius: 12px;
   cursor: pointer;
-  z-index: 1055; /* Đảm bảo cao hơn modal */
+  z-index: 1055;
   display: flex;
   align-items: center;
   justify-content: center;
