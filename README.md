@@ -1,1 +1,1 @@
-# spyronx-nsfw.vercel.app
+# https://spyronx-nsfw.vercel.app
